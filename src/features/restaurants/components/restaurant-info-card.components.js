@@ -1,6 +1,3 @@
-import { View, Image } from "react-native";
-import styled from "styled-components/native";
-
 import { SvgXml } from "react-native-svg";
 import * as Crypto from "expo-crypto";
 
@@ -9,46 +6,16 @@ import { Text } from "../../../components/typography/text.component";
 import Star from "../../../../assets/star";
 import open from "../../../../assets/open";
 
-import { Card } from "react-native-paper";
-
-const RestaurantCard = styled(Card)`
-  background-color: ${(props) => props.theme.colors.bg.primary};
-`;
-
-const RestaurantCardCover = styled(Card.Cover)`
-  padding: ${(props) => props.theme.space[3]};
-  background-color: ${(props) => props.theme.colors.bg.primary};
-`;
-
-const Address = styled(Text)`
-  font-family: ${(props) => props.theme.fonts.body};
-  font-size: ${(props) => props.theme.fontSizes.caption};
-`;
-
-const Info = styled(View)`
-  padding: ${(props) => props.theme.space[3]};
-`;
-
-const Section = styled(View)`
-  flex-direction: row;
-  align-items: center;
-`;
-
-const SectionEnd = styled.View`
-  flex: 1;
-  flex-direction: row;
-  justify-content: flex-end;
-`;
-
-const Rating = styled(View)`
-  flex-direction: row;
-  padding: ${({ theme }) => theme.space[2]} 0px;
-`;
-
-const Icon = styled(Image)`
-  width: 15px;
-  height: 15px;
-`;
+import {
+  Address,
+  Icon,
+  RestaurantCard,
+  RestaurantCardCover,
+  Section,
+  SectionEnd,
+  Info,
+  Rating,
+} from "./restaurant-info-card.styles";
 
 export const RestaurantInfoCard = ({ restaurant = {} }) => {
   const {
@@ -82,7 +49,7 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
               {isOpenNow && <SvgXml xml={open} width={20} height={20} />}
             </Spacer>
             <Spacer position="left" size="large">
-              <Icon style={{ width: 15, height: 15 }} source={{ uri: icon }} />
+              <Icon source={{ uri: icon }} />
             </Spacer>
           </SectionEnd>
         </Section>

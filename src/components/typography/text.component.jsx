@@ -1,5 +1,6 @@
 import styled from "styled-components/native";
 
+// default for text component if there are no variant attribute
 const defaultTextStyles = (theme) => `
   font-family: ${theme.fonts.body};
   font-weight: ${theme.fontWeights.regular};
