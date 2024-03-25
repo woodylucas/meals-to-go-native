@@ -1,11 +1,12 @@
-import { View, Text } from "react-native";
+import { View, Image, Text } from "react-native";
 import styled from "styled-components/native";
 
 import { SvgXml } from "react-native-svg";
 import * as Crypto from "expo-crypto";
 
+import { Spacer } from "../../../components/spacer/spacer.component";
 import Star from "../../../../assets/star";
-import OpenIcon from "../../../../assets/open";
+import open from "../../../../assets/open";
 
 import { Card } from "react-native-paper";
 
@@ -44,10 +45,6 @@ const SectionEnd = styled.View`
   justify-content: flex-end;
 `;
 
-const Open = styled(SvgXml)`
-  flex-direction: row;
-`;
-
 const Rating = styled(View)`
   flex-direction: row;
   padding: ${({ theme }) => theme.space[2]} 0px;
@@ -56,7 +53,7 @@ const Rating = styled(View)`
 export const RestaurantInfoCard = ({ restaurant = {} }) => {
   const {
     name = "Some Restaurant",
-    icon,
+    icon = "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
     photos = [
       "https://www.foodiesfeed.com/wp-content/uploads/2019/06/top-view-for-box-of-2-burgers-home-made-600x899.jpg",
     ],
@@ -83,7 +80,12 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
                 CLOSED TEMPORARILY
               </Text>
             )}
-            {isOpenNow && <Open xml={OpenIcon} width={20} height={20} />}
+            <Spacer position="left" size="large">
+              {isOpenNow && <SvgXml xml={open} width={20} height={20} />}
+            </Spacer>
+            <Spacer position="left" size="large">
+              <Image style={{ width: 15, height: 15 }} source={{ uri: icon }} />
+            </Spacer>
           </SectionEnd>
         </Section>
         <Address>{address}</Address>
