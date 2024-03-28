@@ -3,7 +3,7 @@ import { Text } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import { RestuarantsNavigator } from "./restaurants.navigator";
+import { RestuarantsNavigator } from "../navigation/restaurants.navigator";
 
 import { SafeArea } from "../../components/utility/safe-area.component";
 import { Ionicons } from "@expo/vector-icons";

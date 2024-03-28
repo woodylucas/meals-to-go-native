@@ -10,7 +10,8 @@ import {
 } from "./restaurants.screen.style";
 import useRestaurantContext from "../../../utils/hooks/useRestaurantContext";
 import { Search } from "../components/search.component";
-import { Pressable } from "react-native";
+import { TouchableOpacity } from "react-native";
+import * as Crypto from "expo-crypto";
 
 export const RestaurantScreen = ({ navigation }) => {
   const { restaurants, isLoading } = useRestaurantContext();
@@ -26,11 +27,18 @@ export const RestaurantScreen = ({ navigation }) => {
       <RestaurantList
         data={restaurants}
         renderItem={({ item }) => (
-          <Pressable onPress={() => navigation.navigate("RestaurantDetails")}>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("RestaurantDetails", {
+                id: Crypto.randomUUID(),
+                restaurant: item,
+              })
+            }
+          >
             <Spacer position="bottom" size="large">
               <RestaurantInfoCard restaurant={item} />
             </Spacer>
-          </Pressable>
+          </TouchableOpacity>
         )}
         keyExtractor={(item) => item.name}
       />
