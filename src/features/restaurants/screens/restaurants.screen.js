@@ -10,8 +10,9 @@ import {
 } from "./restaurants.screen.style";
 import useRestaurantContext from "../../../utils/hooks/useRestaurantContext";
 import { Search } from "../components/search.component";
+import { Pressable } from "react-native";
 
-export const RestaurantScreen = () => {
+export const RestaurantScreen = ({ navigation }) => {
   const { restaurants, error, isLoading } = useRestaurantContext();
 
   return (
@@ -25,9 +26,11 @@ export const RestaurantScreen = () => {
       <RestaurantList
         data={restaurants}
         renderItem={({ item }) => (
-          <Spacer position="bottom" size="large">
-            <RestaurantInfoCard restaurant={item} />
-          </Spacer>
+          <Pressable onPress={() => navigation.navigate("RestaurantDetails")}>
+            <Spacer position="bottom" size="large">
+              <RestaurantInfoCard restaurant={item} />
+            </Spacer>
+          </Pressable>
         )}
         keyExtractor={(item) => item.name}
       />
