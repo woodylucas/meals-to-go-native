@@ -13,7 +13,7 @@ import { Search } from "../components/search.component";
 import { Pressable } from "react-native";
 
 export const RestaurantScreen = ({ navigation }) => {
-  const { restaurants, error, isLoading } = useRestaurantContext();
+  const { restaurants, isLoading } = useRestaurantContext();
 
   return (
     <SafeArea>
