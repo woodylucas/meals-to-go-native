@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { SearchContainer } from "../screens/restaurants.screen.style";
 import { Searchbar } from "react-native-paper";
 import useLocationContext from "../../../utils/hooks/useLocationContext";
