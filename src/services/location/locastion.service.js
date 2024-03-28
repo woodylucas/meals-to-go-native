@@ -1,8 +1,8 @@
 import camelize from "camelize";
 
-import { locations } from "./locations.mock";
+import { locations } from "./location.mock";
 
-export const locationRequest = (searchTerm) => {
+export const locationRequest = (searchTerm = "Antwerp") => {
   return new Promise((resolve, reject) => {
     const locationMock = locations[searchTerm];
     if (!locationMock) {
