@@ -3,7 +3,7 @@ import { Text } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import { RestaurantScreen } from "../../features/restaurants/screens/restaurants.screen";
+import { RestuarantsNavigator } from "./restaurants.navigator";
 
 import { SafeArea } from "../../components/utility/safe-area.component";
 import { Ionicons } from "@expo/vector-icons";
@@ -43,7 +43,7 @@ export const AppNavigator = () => {
   return (
     <NavigationContainer>
       <Tab.Navigator screenOptions={createScreenOptions}>
-        <Tab.Screen name="Restaurant" component={RestaurantScreen} />
+        <Tab.Screen name="Restaurant" component={RestuarantsNavigator} />
         <Tab.Screen name="Map" component={MapScreen} />
         <Tab.Screen name="Settings" component={SettingsScreen} />
       </Tab.Navigator>
