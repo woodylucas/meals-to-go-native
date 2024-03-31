@@ -16,12 +16,13 @@ import * as Crypto from "expo-crypto";
 export const RestaurantScreen = ({ navigation }) => {
   const { restaurants, isLoading } = useRestaurantContext();
 
+  console.log(isLoading);
   return (
     <SafeArea>
       <Search />
       {isLoading && (
         <LoadingContainer>
-          <Loading size={50} animating={true} color={MD2Colors.blue300} />
+          <Loading size={50} color={MD2Colors.blue300} />
         </LoadingContainer>
       )}
       <RestaurantList
