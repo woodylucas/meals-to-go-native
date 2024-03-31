@@ -16,7 +16,6 @@ import * as Crypto from "expo-crypto";
 export const RestaurantScreen = ({ navigation }) => {
   const { restaurants, isLoading } = useRestaurantContext();
 
-  console.log(isLoading);
   return (
     <SafeArea>
       <Search />
