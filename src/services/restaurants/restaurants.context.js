@@ -3,7 +3,6 @@ import {
   restaurantsRequest,
   restaurantsTransform,
 } from "./restaurants.service";
-
 import useLocationContext from "../../utils/hooks/useLocationContext";
 
 export const RestaurantsContext = createContext({
