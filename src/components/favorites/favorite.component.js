@@ -18,8 +18,6 @@ export const Favorite = ({ restaurant }) => {
     (favorite) => favorite.placeId === restaurant.placeId
   );
 
-  console.log("favorites", favorites.length);
-
   return (
     <FavoriteButton
       onPress={() =>
