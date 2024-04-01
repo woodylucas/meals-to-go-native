@@ -1,4 +1,4 @@
-import { CompactRestaurantInfo } from "../../../components/restaurant/compact-impact-restaurant-info.compoent";
+import { CompactRestaurantInfo } from "../../../components/restaurant/compact-impact-restaurant-info.component";
 
 export const MapCalloutComponent = ({ restaurant }) => {
   return <CompactRestaurantInfo restaurant={restaurant} />;
