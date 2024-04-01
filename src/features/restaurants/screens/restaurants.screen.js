@@ -12,9 +12,11 @@ import useRestaurantContext from "../../../utils/hooks/useRestaurantContext";
 import { Search } from "../components/search.component";
 import { TouchableOpacity } from "react-native";
 import * as Crypto from "expo-crypto";
+import useFavoritesContext from "../../../utils/hooks/useFavoritesContext";
 
 export const RestaurantScreen = ({ navigation }) => {
   const { restaurants, isLoading } = useRestaurantContext();
+  const { favorites } = useFavoritesContext();
 
   return (
     <SafeArea>
