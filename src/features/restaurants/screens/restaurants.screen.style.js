@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
-import { FlatList } from "react-native";
+import { FlashList } from "@shopify/flash-list";
 import { ActivityIndicator } from "react-native-paper";
 
 const SearchContainer = styled.View`
   padding: ${(props) => props.theme.space[3]};
 `;
 
-const RestaurantList = styled(FlatList).attrs({
+const RestaurantList = styled(FlashList).attrs({
   contentContainerStyle: {
     padding: 16,
   },

@@ -37,6 +37,7 @@ export const RestaurantScreen = ({ navigation }) => {
       )}
       <RestaurantList
         data={restaurants}
+        estimatedItemSize={100}
         renderItem={({ item }) => (
           <TouchableOpacity
             onPress={() =>
