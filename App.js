@@ -6,6 +6,8 @@ import { ThemeProvider } from "styled-components/native";
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
+import AuthenticationContextProvider from "./src/services/authentication/authentication-context";
+
 import {
   useFonts as useOswald,
   Oswald_400Regular,
@@ -17,7 +19,6 @@ import RestaurantsContextProvider from "./src/services/restaurants/restaurants.c
 import LocationContextProvider from "./src/services/location/location.context";
 import FavoritesContextProvider from "./src/services/favorites/favorites.context";
 import { Navigation } from "./src/infrastructure/navigation";
-import AuthenticationContextProvider from "./src/services/authentication/authentication-context";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAsVF3rVYNn75_8HBzKrj88e692OZLTbgo",
@@ -31,19 +32,15 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 export default function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  console.log();
-
-  useEffect(() => {
-    const auth = getAuth(app);
-    signInWithEmailAndPassword(auth, "mo@binni.io", "test123")
-      .then((user) => {
-        console.log(user);
-        setIsAuthenticated(true);
-      })
-      .catch((e) => console.log(e));
-  }, []);
+  // useEffect(() => {
+  //   const auth = getAuth(app);
+  //   signInWithEmailAndPassword(auth, "mo@binni.io", "test123")
+  //     .then((user) => {
+  //       console.log(user);
+  //       setIsAuthenticated(true);
+  //     })
+  //     .catch((e) => console.log(e));
+  // }, []);
 
   const [oswaldLoaded] = useOswald({
     Oswald_400Regular,
