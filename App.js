@@ -17,6 +17,7 @@ import RestaurantsContextProvider from "./src/services/restaurants/restaurants.c
 import LocationContextProvider from "./src/services/location/location.context";
 import FavoritesContextProvider from "./src/services/favorites/favorites.context";
 import { Navigation } from "./src/infrastructure/navigation";
+import AuthenticationContextProvider from "./src/services/authentication/authentication-context";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAsVF3rVYNn75_8HBzKrj88e692OZLTbgo",
@@ -58,13 +59,15 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <FavoritesContextProvider>
-          <LocationContextProvider>
-            <RestaurantsContextProvider>
-              <Navigation />
-            </RestaurantsContextProvider>
-          </LocationContextProvider>
-        </FavoritesContextProvider>
+        <AuthenticationContextProvider>
+          <FavoritesContextProvider>
+            <LocationContextProvider>
+              <RestaurantsContextProvider>
+                <Navigation />
+              </RestaurantsContextProvider>
+            </LocationContextProvider>
+          </FavoritesContextProvider>
+        </AuthenticationContextProvider>
         <ExpoStatusBar style="auto" />
       </ThemeProvider>
     </>
