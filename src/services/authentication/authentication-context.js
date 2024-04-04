@@ -1,17 +1,17 @@
-import { useState, createContext, usesEffect, useMemo } from "react";
+import { useState, createContext, useMemo } from "react";
 import { loginRequest } from "./authentication.service";
 
 export const AuthenticationContext = createContext({
   user: null,
   isLoading: false,
-  error: null,
+  error: [],
   onLogin: () => {},
 });
 
 const AuthenticationContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState([]);
 
   const onLogin = async (email, password) => {
     try {
@@ -19,8 +19,8 @@ const AuthenticationContextProvider = ({ children }) => {
       const currentUser = await loginRequest(email, password);
       setUser(currentUser);
     } catch (err) {
-      console.log(err);
-      setError(err);
+      console.log("error", err);
+      setError(String(err));
     } finally {
       setIsLoading(false);
     }
@@ -28,6 +28,7 @@ const AuthenticationContextProvider = ({ children }) => {
 
   const value = useMemo(() => {
     return {
+      isAuthenticated: !!user,
       user,
       isLoading,
       error,
