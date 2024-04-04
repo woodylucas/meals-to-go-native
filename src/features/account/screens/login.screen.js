@@ -37,7 +37,6 @@ export const LoginScreen = ({ navigation }) => {
             textContentType="password"
             secureTextEntry
             autoCapitalize="none"
-            secure
             right={<TextInput.Icon icon="eye" />}
             value={password}
             onChangeText={(text) => setPassword(text)}
