@@ -1,11 +1,13 @@
 import { useState, createContext, useMemo } from "react";
-import { loginRequest } from "./authentication.service";
+import { loginRequest, registerRequest } from "./authentication.service";
 
 export const AuthenticationContext = createContext({
   user: null,
+  isAuthenticated: false,
   isLoading: false,
   error: [],
   onLogin: () => {},
+  onRegister: () => {},
 });
 
 const AuthenticationContextProvider = ({ children }) => {
@@ -26,6 +28,23 @@ const AuthenticationContextProvider = ({ children }) => {
     }
   };
 
+  const onRegister = async (email, password, repeatedPassword) => {
+    if (password !== repeatedPassword) {
+      setError("Error: Passwords do not match");
+      return;
+    }
+    try {
+      setIsLoading(true);
+      const currentUser = await registerRequest(email, password);
+      setUser(currentUser);
+    } catch (err) {
+      console.log("error", err);
+      setError(String(err));
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const value = useMemo(() => {
     return {
       isAuthenticated: !!user,
@@ -33,6 +52,7 @@ const AuthenticationContextProvider = ({ children }) => {
       isLoading,
       error,
       onLogin,
+      onRegister,
     };
   }, [user, isLoading, error]);
   return (
