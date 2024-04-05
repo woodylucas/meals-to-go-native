@@ -8,7 +8,9 @@ import {
   Title,
   ErrorContainer,
 } from "../components/account.styles";
-import { TextInput } from "react-native-paper";
+
+import { TextInput, ActivityIndicator, MD2Colors } from "react-native-paper";
+
 import { Text } from "../../../components/typography/text.component";
 import { Spacer } from "../../../components/spacer/spacer.component";
 import useAuth from "../../../utils/hooks/useAuth";
@@ -16,7 +18,12 @@ import useAuth from "../../../utils/hooks/useAuth";
 export const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { onLogin, error } = useAuth();
+  const [showPassword, setShowPassword] = useState(false);
+  const { onLogin, error, isLoading } = useAuth();
+
+  const handleShowPassword = () => {
+    setShowPassword((prevPassword) => !prevPassword);
+  };
 
   return (
     <AccountBackground>
@@ -35,9 +42,14 @@ export const LoginScreen = ({ navigation }) => {
           <AuthInput
             label="Password"
             textContentType="password"
-            secureTextEntry
+            secureTextEntry={!showPassword}
             autoCapitalize="none"
-            right={<TextInput.Icon icon="eye" />}
+            right={
+              <TextInput.Icon
+                icon={showPassword ? "eye" : "eye-off"}
+                onPress={handleShowPassword}
+              />
+            }
             value={password}
             onChangeText={(text) => setPassword(text)}
           />
@@ -48,13 +60,17 @@ export const LoginScreen = ({ navigation }) => {
           </ErrorContainer>
         )}
         <Spacer size="large">
-          <AuthButton
-            icon="lock-open-outline"
-            mode="contained"
-            onPress={() => onLogin(email, password)}
-          >
-            Login
-          </AuthButton>
+          {!isLoading ? (
+            <AuthButton
+              icon="lock-open-outline"
+              mode="contained"
+              onPress={() => onLogin(email, password)}
+            >
+              Login
+            </AuthButton>
+          ) : (
+            <ActivityIndicator color={MD2Colors.blue300} />
+          )}
         </Spacer>
       </AccountContainer>
       <Spacer size="large">

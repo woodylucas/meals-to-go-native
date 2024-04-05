@@ -8,7 +8,8 @@ import {
   Title,
   ErrorContainer,
 } from "../components/account.styles";
-import { TextInput } from "react-native-paper";
+
+import { TextInput, ActivityIndicator, MD2Colors } from "react-native-paper";
 import { Text } from "../../../components/typography/text.component";
 import { Spacer } from "../../../components/spacer/spacer.component";
 import useAuth from "../../../utils/hooks/useAuth";
@@ -17,7 +18,13 @@ export const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatedPassword, setRepeatedPassword] = useState("");
-  const { onRegister, error } = useAuth();
+  const [showPassword, setShowPassword] = useState(false);
+
+  const { onRegister, isLoading, error } = useAuth();
+
+  const handleShowPassword = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
 
   return (
     <AccountBackground>
@@ -36,9 +43,14 @@ export const RegisterScreen = ({ navigation }) => {
           <AuthInput
             label="Password"
             textContentType="password"
-            secureTextEntry
+            secureTextEntry={!showPassword}
             autoCapitalize="none"
-            right={<TextInput.Icon icon="eye" />}
+            right={
+              <TextInput.Icon
+                icon={showPassword ? "eye" : "eye-off"}
+                onPress={handleShowPassword}
+              />
+            }
             value={password}
             onChangeText={(text) => setPassword(text)}
           />
@@ -46,9 +58,14 @@ export const RegisterScreen = ({ navigation }) => {
             label="Repeat Password"
             value={repeatedPassword}
             textContentType="password"
-            secureTextEntry
+            secureTextEntry={!showPassword}
             autoCapitalize="none"
-            right={<TextInput.Icon icon="eye" />}
+            right={
+              <TextInput.Icon
+                icon={showPassword ? "eye" : "eye-off"}
+                onPress={handleShowPassword}
+              />
+            }
             onChangeText={(text) => setRepeatedPassword(text)}
           />
         </Spacer>
@@ -58,13 +75,17 @@ export const RegisterScreen = ({ navigation }) => {
           </ErrorContainer>
         )}
         <Spacer size="large">
-          <AuthButton
-            icon="email"
-            mode="contained"
-            onPress={() => onRegister(email, password, repeatedPassword)}
-          >
-            Register
-          </AuthButton>
+          {!isLoading ? (
+            <AuthButton
+              icon="email"
+              mode="contained"
+              onPress={() => onRegister(email, password, repeatedPassword)}
+            >
+              Register
+            </AuthButton>
+          ) : (
+            <ActivityIndicator color={MD2Colors.blue300} />
+          )}
         </Spacer>
       </AccountContainer>
       <Spacer size="large">
