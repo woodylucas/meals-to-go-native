@@ -1,4 +1,4 @@
-import { Text } from "react-native";
+import { Text, Button } from "react-native";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
@@ -7,6 +7,11 @@ import { MapScreen } from "../../features/map/map.screen";
 
 import { SafeArea } from "../../components/utility/safe-area.component";
 import { Ionicons } from "@expo/vector-icons";
+import useAuth from "../../utils/hooks/useAuth";
+
+import FavoritesContextProvider from "../../services/favorites/favorites.context";
+import LocationContextProvider from "../../services/location/location.context";
+import RestaurantsContextProvider from "../../services/restaurants/restaurants.context";
 
 const Tab = createBottomTabNavigator();
 
@@ -16,11 +21,15 @@ const TAB_ICON = {
   Settings: "settings",
 };
 
-const SettingsScreen = () => (
-  <SafeArea>
-    <Text>Settings!</Text>
-  </SafeArea>
-);
+const SettingsScreen = () => {
+  const { onLogout } = useAuth();
+  return (
+    <SafeArea>
+      <Text>Settings!</Text>
+      <Button title="logout" onPress={() => onLogout()} />
+    </SafeArea>
+  );
+};
 
 const createScreenOptions = ({ route }) => {
   const iconName = TAB_ICON[route.name];
@@ -36,10 +45,16 @@ const createScreenOptions = ({ route }) => {
 
 export const AppNavigator = () => {
   return (
-    <Tab.Navigator screenOptions={createScreenOptions}>
-      <Tab.Screen name="Restaurant" component={RestuarantsNavigator} />
-      <Tab.Screen name="Map" component={MapScreen} />
-      <Tab.Screen name="Settings" component={SettingsScreen} />
-    </Tab.Navigator>
+    <FavoritesContextProvider>
+      <LocationContextProvider>
+        <RestaurantsContextProvider>
+          <Tab.Navigator screenOptions={createScreenOptions}>
+            <Tab.Screen name="Restaurant" component={RestuarantsNavigator} />
+            <Tab.Screen name="Map" component={MapScreen} />
+            <Tab.Screen name="Settings" component={SettingsScreen} />
+          </Tab.Navigator>
+        </RestaurantsContextProvider>
+      </LocationContextProvider>
+    </FavoritesContextProvider>
   );
 };
