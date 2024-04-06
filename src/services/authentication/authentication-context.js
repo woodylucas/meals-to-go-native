@@ -1,5 +1,6 @@
 import { useState, createContext, useMemo } from "react";
-import { loginRequest, registerRequest } from "./authentication.service";
+import { loginRequest, registerRequest, auth } from "./authentication.service";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 
 export const AuthenticationContext = createContext({
   user: null,
@@ -7,6 +8,7 @@ export const AuthenticationContext = createContext({
   isLoading: false,
   error: [],
   onLogin: () => {},
+  onLogout: () => {},
   onRegister: () => {},
 });
 
@@ -14,6 +16,15 @@ const AuthenticationContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState([]);
+
+  onAuthStateChanged(auth, (currentUser) => {
+    if (currentUser) {
+      setUser(currentUser);
+      setIsLoading(false);
+    } else {
+      setIsLoading(false);
+    }
+  });
 
   const onLogin = async (email, password) => {
     try {
@@ -45,6 +56,15 @@ const AuthenticationContextProvider = ({ children }) => {
     }
   };
 
+  const onLogout = async () => {
+    try {
+      await signOut(auth);
+      setUser(null);
+    } catch (err) {
+      console.log(err, "error");
+    }
+  };
+
   const value = useMemo(() => {
     return {
       isAuthenticated: !!user,
@@ -53,6 +73,7 @@ const AuthenticationContextProvider = ({ children }) => {
       error,
       onLogin,
       onRegister,
+      onLogout,
     };
   }, [user, isLoading, error]);
   return (
