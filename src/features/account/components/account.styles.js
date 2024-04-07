@@ -3,6 +3,8 @@ import { Button, TextInput } from "react-native-paper";
 import { Text } from "../../../components/typography/text.component";
 import { colors } from "../../../infrastructure/theme/colors";
 
+import LottieView from "lottie-react-native";
+
 export const AccountBackground = styled.ImageBackground.attrs({
   source: require("../../../../assets/home_bg.jpg"),
 })`
@@ -17,6 +19,16 @@ export const AccountCover = styled.View`
   width: 100%;
   height: 100%;
   background-color: rgba(255, 255, 255, 0.3);
+`;
+
+export const AnimationView = styled(LottieView).attrs({
+  source: require("../../../../assets/watermelon.json"),
+})`
+  position: absolute;
+  width: 100%;
+  height: 40%;
+  top: 30px;
+  padding: ${(props) => props.theme.space[2]};
 `;
 
 export const Title = styled(Text)`

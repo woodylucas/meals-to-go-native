@@ -4,6 +4,7 @@ import {
   AccountCover,
   AuthButton,
   Title,
+  AnimationView,
 } from "../components/account.styles";
 
 import { Spacer } from "../../../components/spacer/spacer.component";
@@ -12,6 +13,8 @@ export const AccountScreen = ({ navigation }) => {
   return (
     <AccountBackground>
       <AccountCover />
+      <AnimationView resizeMode="cover" autoPlay loop />
+
       <Title>Meals To Go</Title>
       <AccountContainer>
         <AuthButton
