@@ -35,7 +35,7 @@ export const SettingsScreen = ({ navigation }) => {
           title="Favorites"
           description="View your favorites"
           left={(props) => <List.Icon {...props} color="black" icon="heart" />}
-          // onPress={() => navigation.navigate("Favorites")}
+          onPress={() => navigation.navigate("Favorites")}
         />
         <SettingsItem
           title="Logout"
