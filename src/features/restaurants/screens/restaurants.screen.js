@@ -2,6 +2,7 @@ import { useState } from "react";
 import { MD2Colors } from "react-native-paper";
 import { RestaurantInfoCard } from "../components/restaurant-info-card.components";
 
+import { FadeInView } from "../../../components/animations/fade.animation";
 import { Spacer } from "../../../components/spacer/spacer.component";
 import { SafeArea } from "../../../components/utility/safe-area.component";
 import {
@@ -23,6 +24,11 @@ export const RestaurantScreen = ({ navigation }) => {
 
   return (
     <SafeArea>
+      {isLoading && (
+        <LoadingContainer>
+          <Loading size={50} color={MD2Colors.blue300} />
+        </LoadingContainer>
+      )}
       <Search
         isFavoriteToggled={isToggled}
         onFavoritesToggled={() => setIsToggled((prevIsToggle) => !prevIsToggle)}
@@ -30,11 +36,7 @@ export const RestaurantScreen = ({ navigation }) => {
       {isToggled && (
         <FavoritesBar favorites={favorites} onNavigate={navigation.navigate} />
       )}
-      {isLoading && (
-        <LoadingContainer>
-          <Loading size={50} color={MD2Colors.blue300} />
-        </LoadingContainer>
-      )}
+
       <RestaurantList
         data={restaurants}
         estimatedItemSize={100}
@@ -48,7 +50,9 @@ export const RestaurantScreen = ({ navigation }) => {
             }
           >
             <Spacer position="bottom" size="large">
-              <RestaurantInfoCard restaurant={item} />
+              <FadeInView>
+                <RestaurantInfoCard restaurant={item} />
+              </FadeInView>
             </Spacer>
           </TouchableOpacity>
         )}
