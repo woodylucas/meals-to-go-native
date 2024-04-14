@@ -11,9 +11,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
@@ -23,19 +21,6 @@
         "backgroundColor": "#ffffff"
       }
     },
-    "plugins": [
-      "expo-font"
-    ],
-    "extra": {
-      "eas": {
-        "projectId": "077b04b2-b669-4d42-bd68-39085de61566"
-      }
-    },
-    "runtimeVersion": {
-      "policy": "appVersion"
-    },
-    "updates": {
-      "url": "https://u.expo.dev/077b04b2-b669-4d42-bd68-39085de61566"
-    }
+    "plugins": ["expo-font"]
   }
 }
